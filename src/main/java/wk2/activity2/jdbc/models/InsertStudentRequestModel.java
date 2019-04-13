@@ -17,6 +17,7 @@ public class InsertStudentRequestModel implements Validate {
         this.gpa = gpa;
     }
 
+
     @Override
     public boolean isValid() {
         int emailLen = email.length();

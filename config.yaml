@@ -1,9 +1,36 @@
+# YAML config files consist of groupings of affiliated key:value pairs, which can be parsed using Jackson. Just like how
+# Jackson maps JSON strings to POJOs, Jackson maps YAML config files to POJOs. The YAML config is the textual
+# representation of the data (that is to say, the parameters we want to use to configure out microservice. The POJO
+# representation of the data is a Map<String,String>. The ConfigsModel class consists of two Map<String,String> objects
+# corresponding to the two groups below:
+
+# ----------------------------------------------------------------------------------------------------------------------
+# The service config parameters are used to configure your microservice's Grizzly HTTP server.
+#   scheme: This is the protocol our request will be using. The values will be http:// or https://
+
+#   hostName: This is the name of the host which your service is running on. Remember, hostName can be either an IP
+#             address OR a domain name. A value of 0.0.0.0 tells the HTTP server to accept requests destined for ANY
+#             IPv4 address. This is a HORRIBLE, HORRIBLE PRACTICE! You should ALWAYS use the IP address of the computer
+#             your application is running on.
+#
+#   port: This is the port number your application listens on. It should be the LAST 4 DIGITS OF OUR STUDENT ID# simply
+#         to avoid port conflicts. If you all stick with using the example # of 6243 you're going to run in to port
+#         conflicts and your web server won't be able to run.
+#
+#   path: This is the resource path to which the HTTP server will accept inbound traffic.
+# ----------------------------------------------------------------------------------------------------------------------
 serviceConfig:
   scheme: http://
   hostName: 0.0.0.0
   port: 6243
   path: /api/basicService
 
+# ----------------------------------------------------------------------------------------------------------------------
+# The logger config parameters are used to configure the logging within your microservice.
+#   outputDir: This is the directory to which all of your log files will be written.
+#
+#   outputFile: This is the file to which all of your log statements will be written.
+# ----------------------------------------------------------------------------------------------------------------------
 loggerConfig:
   outputDir: ./logs/
   outputFile: basicService.log

@@ -4,7 +4,12 @@ import wk2.activity2.jdbc.logger.ServiceLogger;
 import wk2.activity2.jdbc.models.ConfigsModel;
 
 public class Configs {
-    // Default service configs
+    // Default service configs. These configurations are for use by the Grizzly HTTP server. We can set default params
+    // for the HTTP server because the HTTP server does its job independent of the host it is actually running on. That
+    // is to say, it doesn't matter what host the HTTP server runs on. By setting default values, we are assured that
+    // even if there is a critical failure in reading a configuration file or assigning custom parameters, the service
+    // will always be able to revert to a pre-determined, working state. You should only revert to using defaults if
+    // there is some critical error with your application and you need to return it to a working state.
     private final String DEFAULT_SCHEME = "http://";
     private final String DEFAULT_HOSTNAME = "0.0.0.0";
     private final int    DEFAULT_PORT = 6243;
@@ -32,10 +37,18 @@ public class Configs {
         outputFile = DEFAULT_OUTPUTFILE;
     }
 
+    /*
+        If a configuration file is located, then each key within that config file must now be retrieved from it's
+        corresponding Map<String,String> within the CongfigsModel, and assigned to a variable for use in other places
+        of your microservice. Extensive error checking in this process is very important. Note that all data members
+        are private, with only getters supplied. This is because we do not want any outside class to be able to change
+        the configurations loaded from the file once they exists in our application.
+     */
     public Configs(ConfigsModel cm) throws NullPointerException {
         if (cm == null) {
             throw new NullPointerException("Unable to create Configs from ConfigsModel.");
         } else {
+
             // Set service configs
             scheme = cm.getServiceConfig().get("scheme");
             if (scheme == null) {
