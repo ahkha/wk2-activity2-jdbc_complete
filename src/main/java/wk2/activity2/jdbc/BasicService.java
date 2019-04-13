@@ -169,9 +169,9 @@ public class BasicService {
         // program from your laptop, and not on Openlab. Check piazza and the homework documentation for details.
         int port = 3307;
         // Set the user account your program will use to connect to the desired database.
-        String username = "cs122b-inst";
+        String username = "";
         // Set the corresponding password for the above user account
-        String password = "cs122btest";
+        String password = "";
         // Set the name of the database to connect to
         String dbName = "cs122b_example";
         // Set the query string containing configurations for THIS connection to the database. The below string is 100%
